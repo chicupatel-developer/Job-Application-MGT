@@ -75,8 +75,8 @@ namespace API.Job.Application.Controllers
         }
 
         [HttpPost]
-        [Route("addJobApplication")]
-        public IActionResult AddJobApplication(JobApplication jobAppData)
+        [Route("addJob")]
+        public IActionResult AddJob(JobApplication jobAppData)
         {
             _response = new APIResponse();
             try
@@ -112,5 +112,51 @@ namespace API.Job.Application.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("editJobApp")]
+        public IActionResult EditJobApp(JobApplicationEditVM jobAppData)
+        {
+            _response = new APIResponse();
+            try
+            {
+                if (jobAppData == null)
+                {
+                    return BadRequest();
+                }
+
+                // throw new Exception();
+
+                // check for ModelState
+                // ModelState.AddModelError("contactPersonName", "Contact Person Name is Required!");
+                
+                if (ModelState.IsValid)
+                {
+                    // check for appStatus==Closed
+                    // user can't edit this job-app
+                    if (_jobAppRepo.JobAppClosed(jobAppData.JobApplication.JobApplicationId))
+                        throw new Exception();
+
+                    if (_jobAppRepo.EditJobApp(jobAppData) != null)
+                    {
+                        _response.ResponseCode = 0;
+                        _response.ResponseMessage = "Job Edited Successfully !";
+                        return Ok(_response);
+                    }
+                    else
+                    {
+                        return BadRequest("Data Not Found on Server!");
+                    }
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Server Error !");
+            }
+        }
     }
 }
