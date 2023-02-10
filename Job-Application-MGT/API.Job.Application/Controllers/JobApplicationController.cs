@@ -59,6 +59,20 @@ namespace API.Job.Application.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("viewJobApp/{jobAppId}")]
+        public IActionResult ViewJobApp(int jobAppId)
+        {
+            try
+            {
+                var jobApp = _jobAppRepo.ViewJobApp(jobAppId);
+                return Ok(jobApp);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Service Not Available!");
+            }
+        }
 
         [HttpPost]
         [Route("addJobApplication")]
