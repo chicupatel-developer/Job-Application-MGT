@@ -120,16 +120,20 @@ namespace API.Job.Application.Controllers
             _response = new APIResponse();
             try
             {
+                // jobAppData = null;
                 if (jobAppData == null)
                 {
-                    return BadRequest();
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Job-Application is Null!";
+                    return BadRequest(_response);
                 }
 
                 // throw new Exception();
 
                 // check for ModelState
                 // ModelState.AddModelError("contactPersonName", "Contact Person Name is Required!");
-                
+                // ModelState.AddModelError("contactEmail", "Contact Email is Required!");
+
                 if (ModelState.IsValid)
                 {
                     // check for appStatus==Closed
@@ -145,7 +149,9 @@ namespace API.Job.Application.Controllers
                     }
                     else
                     {
-                        return BadRequest("Data Not Found on Server!");
+                        _response.ResponseCode = -1;
+                        _response.ResponseMessage = "Data Not Found on Server!";
+                        return BadRequest(_response);                        
                     }
                 }
                 else
