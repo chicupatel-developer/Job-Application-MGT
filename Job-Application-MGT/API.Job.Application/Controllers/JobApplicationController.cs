@@ -81,19 +81,20 @@ namespace API.Job.Application.Controllers
             _response = new APIResponse();
             try
             {
-                // check for null
                 // jobAppData = null;
                 if (jobAppData == null)
                 {
-                    return BadRequest();
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Job-Application is Null!";
+                    return BadRequest(_response);
                 }
 
-                // check for exception
                 // throw new Exception();
 
                 // check for ModelState
-                // ModelState.AddModelError("contactPersonName", "contact person name is required!");
-             
+                // ModelState.AddModelError("contactPersonName", "Contact Person Name is Required!");
+                // ModelState.AddModelError("contactEmail", "Contact Email is Required!");
+
                 if (ModelState.IsValid)
                 {
                     _jobAppRepo.AddJobApp(jobAppData);
