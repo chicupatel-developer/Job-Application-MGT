@@ -75,8 +75,8 @@ namespace API.Job.Application.Controllers
         }
 
         [HttpPost]
-        [Route("addJob")]
-        public IActionResult AddJob(JobApplication jobAppData)
+        [Route("addJobApp")]
+        public IActionResult AddJobApp(JobApplication jobAppData)
         {
             _response = new APIResponse();
             try
