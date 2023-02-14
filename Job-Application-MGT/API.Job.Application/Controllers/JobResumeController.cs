@@ -147,5 +147,71 @@ namespace API.Job.Application.Controllers
                 return StatusCode(500, "Server Error !");
             }
         }
+
+        // file-download
+        [HttpGet, DisableRequestSizeLimit]
+        [Route("downloadResume/{jobApplicationId}")]
+        public async Task<IActionResult> DownloadResume(int jobApplicationId)
+        {
+            try
+            {
+                // check for exception
+                // throw new Exception();
+
+                // check if file exist @ database
+                string fileName = _jobResumeRepo.GetResumeFile(jobApplicationId);
+                if (fileName == null)
+                {
+                    return BadRequest();
+                }
+
+                string resumeStoragePath = _configuration.GetSection("ResumeUploadLocation").GetSection("Path").Value;
+                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+                currentDirectory = currentDirectory + "\\" + resumeStoragePath;
+                var file = Path.Combine(currentDirectory, fileName);
+
+                // check if file exists @ file-system
+                if (System.IO.File.Exists(file))
+                {
+                    var memory = new MemoryStream();
+                    using (var stream = new FileStream(file, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memory);
+                    }
+
+                    memory.Position = 0;
+                    return File(memory, GetMimeType(file), fileName);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Server Error!");
+            }
+        }
+        private string GetMimeType(string file)
+        {
+            string extension = Path.GetExtension(file).ToLowerInvariant();
+            switch (extension)
+            {
+                case ".txt": return "text/plain";
+                case ".pdf": return "application/pdf";
+                case ".doc": return "application/vnd.ms-word";
+                case ".docx": return "application/vnd.ms-word";
+                case ".xls": return "application/vnd.ms-excel";
+                case ".png": return "image/png";
+                case ".jpg": return "image/jpeg";
+                case ".jpeg": return "image/jpeg";
+                case ".gif": return "image/gif";
+                case ".csv": return "text/csv";
+                default: return "";
+            }
+        }
+
+
+
     }
 }

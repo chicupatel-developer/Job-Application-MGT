@@ -9,5 +9,7 @@ namespace ServiceLib.Job.Application.Interfaces
     {
         bool StoreResumeFile(JobResume jobResume);
         bool JobAppClosed(int jobApplicationId);
+        string GetResumeFile(int jobApplicationId);
+
     }
 }
