@@ -202,5 +202,23 @@ namespace API.Job.Application.Controllers
                 return StatusCode(500, "Server Error !");
             }
         }
+
+
+        [HttpGet]
+        [Route("trackJobApp/{jobAppId}")]
+        public IActionResult TrackJobApps(int jobAppId)
+        {
+            try
+            {
+                // throw new Exception();
+
+                var appStatusLog = _jobAppRepo.TrackJobAppStatus(jobAppId);
+                return Ok(appStatusLog);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Server Error !");
+            }
+        }
     }
 }
