@@ -34,7 +34,8 @@ namespace API.Job.Application
 
             #region Repositories
             services.AddTransient<IJobApplicationRepository, JobApplicationRepository>();
-      
+            services.AddTransient<IJobResumeRepository, JobResumeRepository>();
+
             #endregion
 
             #region JobApplicationDBContext

@@ -25,5 +25,9 @@
     <ProjectReference Include="..\ServiceLib.Job.Application\ServiceLib.Job.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StaticFiles\Resumes\" />
+  </ItemGroup>
+
 
 </Project>
