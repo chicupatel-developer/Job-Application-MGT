@@ -34,12 +34,10 @@ namespace API.Job.Application.Controllers
             _configuration = configuration;
         }
 
-        // react ok
-        // ng ok
         // file-upload
         [HttpPost, DisableRequestSizeLimit]
-        [Route("upload")]
-        public IActionResult Upload([FromForm] ResumeUpload resumeUpload)
+        [Route("uploadResume")]
+        public IActionResult UploadResume([FromForm] ResumeUpload resumeUpload)
         {
             _response = new APIResponse();
             try
