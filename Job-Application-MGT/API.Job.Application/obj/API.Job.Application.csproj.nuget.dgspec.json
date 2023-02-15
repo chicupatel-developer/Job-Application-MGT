@@ -265,7 +265,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Job-Application-MGT\\Job-Application-MGT\\EF.Core.Job.Application\\EF.Core.Job.Application.csproj": {
+                "projectPath": "C:\\Job-Application-MGT\\Job-Application-MGT\\EF.Core.Job.Application\\EF.Core.Job.Application.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -277,6 +281,12 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Select.HtmlToPdf.NetCore": {
+              "target": "Package",
+              "version": "[22.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

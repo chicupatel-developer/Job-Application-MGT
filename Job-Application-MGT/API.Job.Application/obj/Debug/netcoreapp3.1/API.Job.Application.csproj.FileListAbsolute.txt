@@ -55,3 +55,6 @@ C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcore
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\EmailService.Job.Application.pdb
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\ResumeService.Job.Application.pdb
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\ServiceLib.Job.Application.pdb
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Select.Html.dep
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Select.HtmlToPdf.dll
