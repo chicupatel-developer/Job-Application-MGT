@@ -140,7 +140,12 @@ namespace API.Job.Application.Controllers
                     // check for appStatus==Closed
                     // user can't edit this job-app
                     if (_jobAppRepo.JobAppClosed(jobAppData.JobApplication.JobApplicationId))
-                        throw new Exception();
+                    {
+                        _response.ResponseCode = -1;
+                        _response.ResponseMessage = "This Job-Application is already CLOSED!";
+                        return BadRequest(_response);
+                    }
+
 
                     if (_jobAppRepo.EditJobApp(jobAppData) != null)
                     {
