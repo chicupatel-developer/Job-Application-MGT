@@ -15,6 +15,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ServiceLib.Job.Application.Interfaces;
 using ServiceLib.Job.Application.Repositories;
+using ResumeService.Job.Application.Interfaces;
+using ResumeService.Job.Application.Repositories;
 
 namespace API.Job.Application
 {
@@ -31,6 +33,11 @@ namespace API.Job.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            #region resume-service
+            services.AddScoped<IResumeCreator, ResumeCreator>();
+            #endregion
+
 
             #region Repositories
             services.AddTransient<IJobApplicationRepository, JobApplicationRepository>();
