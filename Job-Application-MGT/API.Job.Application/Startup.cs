@@ -17,6 +17,9 @@ using ServiceLib.Job.Application.Interfaces;
 using ServiceLib.Job.Application.Repositories;
 using ResumeService.Job.Application.Interfaces;
 using ResumeService.Job.Application.Repositories;
+using EmailService.Job.Application;
+using EmailService.Job.Application.Interfaces;
+using EmailService.Job.Application.Repositories;
 
 namespace API.Job.Application
 {
@@ -38,6 +41,21 @@ namespace API.Job.Application
             services.AddScoped<IResumeCreator, ResumeCreator>();
             #endregion
 
+            #region email-service
+            var emailConfig = Configuration
+                            .GetSection("EmailConfiguration")
+                            .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+            #endregion
+
+            #region email-file-attachment
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+            #endregion     
 
             #region Repositories
             services.AddTransient<IJobApplicationRepository, JobApplicationRepository>();

@@ -58,3 +58,9 @@ C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcore
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Select.Html.dep
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Select.HtmlToPdf.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
+C:\Job-Application-MGT\Job-Application-MGT\API.Job.Application\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

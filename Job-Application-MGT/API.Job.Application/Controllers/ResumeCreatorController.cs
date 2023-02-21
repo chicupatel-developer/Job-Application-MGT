@@ -15,7 +15,8 @@ using ResumeService.Job.Application.Interfaces;
 using ResumeService.Job.Application.Models;
 using SelectPdf;
 using System.Text;
-
+using EmailService.Job.Application.Interfaces;
+using EmailService.Job.Application.Models;
 
 namespace API.Job.Application.Controllers
 {
@@ -26,10 +27,13 @@ namespace API.Job.Application.Controllers
         private APIResponse _response;
 
         private readonly IResumeCreator _resumeCreator;
+        private readonly IEmailSender _emailSender;
 
-        public ResumeCreatorController(IResumeCreator resumeCreator)
+
+        public ResumeCreatorController(IResumeCreator resumeCreator, IEmailSender emailSender)
         {
             _resumeCreator = resumeCreator;
+            _emailSender = emailSender;
         }
 
 
@@ -134,5 +138,105 @@ namespace API.Job.Application.Controllers
             }
         }
 
+
+        // create pdf resume as byte[] 
+        // and attach it as email attachment,
+        // but do not store .pdf file on server
+        [HttpPost]
+        [Route("createAndEmailResume")]
+        public async Task<ActionResult> createAndEmailResume(MyResume myResume)
+        {
+            _response = new APIResponse();
+            try
+            {
+                // throw new Exception();
+
+                // instantiate a html to pdf converter object
+                HtmlToPdf converter = _resumeCreator.GetHtmlToPdfObject();
+
+                // prepare data
+                // Personal Info
+                PersonalInfo personalInfo = new PersonalInfo();
+                personalInfo = myResume.PersonalInfo;
+                if (personalInfo == null)
+                {
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Personal-Info Null!";
+                    return BadRequest(_response);
+                }
+
+                // Technical Skills List<string>
+                List<string> skills = new List<string>();
+                skills = myResume.Skills;
+                if (skills == null)
+                {
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Technical-Skills Null!";
+                    return BadRequest(_response);
+                }
+
+                // Work Experience
+                List<WorkExperience> workExps = new List<WorkExperience>();
+                workExps = myResume.WorkExperience;
+                if (workExps == null)
+                {
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Work-Experience Null!";
+                    return BadRequest(_response);
+                }
+
+                // Education
+                List<Education> educations = new List<Education>();
+                educations = myResume.Education;
+                if (educations == null)
+                {
+                    _response.ResponseCode = -1;
+                    _response.ResponseMessage = "Education Null!";
+                    return BadRequest(_response);
+                }
+
+
+                var content = _resumeCreator.GetPageHeader() +
+                                _resumeCreator.GetPersonalInfoString(personalInfo) +
+                                _resumeCreator.GetTechnicalSkillsString(skills) +
+                                _resumeCreator.GetWorkExperienceString(workExps) +
+                                _resumeCreator.GetEducationString(educations) +
+                                _resumeCreator.GetPageFooter();
+
+                var pdf = converter.ConvertHtmlString(content);
+                var pdfBytes = pdf.Save();
+
+                // UserResumeEmail db-table
+                // process to add client's email address and datetime
+                // and PersonalInfo>FirstName and LastName @ db
+                // myResume.EmailMyResumeTo = "ankitjpatel2007@hotmail.com";
+                myResume.EmailMyResumeTo = personalInfo.EmailAddress;
+                UserResumeEmail userData = new UserResumeEmail()
+                {
+                    FirstName = personalInfo.FirstName,
+                    LastName = personalInfo.LastName,
+                    ResumeEmailedAt = DateTime.Now,
+                    UserEmail = myResume.EmailMyResumeTo
+                };
+                if (_resumeCreator.AddUserDataWhenResumeEmailed(userData))
+                {
+                    // convert byte[] to memory-stream
+                    MemoryStream stream = new MemoryStream(pdfBytes);
+                    // create .pdf and attach it as email attachment, but do not store .pdf file on server
+                    var message = new Message(new string[] { myResume.EmailMyResumeTo }, "Please check your Resume in attachment!", "[Job-Apps-MGT] #Resume-Creator and #Email-Attachment Service", null, stream, "pdf", "myResume.pdf");
+                    await _emailSender.SendEmailAsync(message);
+
+                    return Ok("Resume sent in your Email-Attachment! Please check your Email!");
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Sending Email Error!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Server Error!");
+            }
+        }
     }
 }
