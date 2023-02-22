@@ -168,26 +168,7 @@ namespace ResumeService.Job.Application.Repositories
 
             return headerString;
         }
-
-        /*
-        public string GetTechnicalSkillsString(List<string> skills)
-        {
-            StringBuilder skillsString = new StringBuilder();
-            skillsString.Append(@"<div class='anyContent'>
-                                    <u class='sectionHeader'>Technical Skills: </u>
-                                    <br />
-                                    <ul>"
-                                );
-
-            foreach (var skill in skills)
-            {
-                skillsString.Append(@"<li class='skillsContent'>" + skill+@"</li>");
-            }
-
-            skillsString.Append(@"</ul></div>");
-            return skillsString.ToString();
-        }
-        */
+            
         public string GetTechnicalSkillsString(List<string> skills)
         {
             StringBuilder skillsString = new StringBuilder();
@@ -275,7 +256,7 @@ namespace ResumeService.Job.Application.Repositories
             return educationString.ToString();
         }
 
-        public bool AddUserDataWhenResumeCreated(UserResumeCreate userData)
+        public bool AddUserDataWhenResumeDownloaded(UserResumeCreate userData)
         {
             try
             {
@@ -289,7 +270,7 @@ namespace ResumeService.Job.Application.Repositories
             }
         }
 
-        public IEnumerable<UserResumeCreate> GetUserResumeCreateData()
+        public IEnumerable<UserResumeCreate> GetUserResumeDownloadData()
         {
             var userDatas = appDbContext.UserResumeCreate;
             if (userDatas != null)

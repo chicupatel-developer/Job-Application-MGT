@@ -122,7 +122,7 @@ namespace API.Job.Application.Controllers
                     ResumeCreatedAt = DateTime.Now,
                     UserIPAddress = myIpAddress.ToString().Substring(0, (myIpAddress.ToString().Length))
                 };
-                if (_resumeCreator.AddUserDataWhenResumeCreated(userData))
+                if (_resumeCreator.AddUserDataWhenResumeDownloaded(userData))
                 {
                     return File(pdfBytes, "application/pdf");
                     // return File(pdfBytes, "application/pdf", "your_resume.pdf");
@@ -144,7 +144,7 @@ namespace API.Job.Application.Controllers
         // but do not store .pdf file on server
         [HttpPost]
         [Route("createAndEmailResume")]
-        public async Task<ActionResult> createAndEmailResume(MyResume myResume)
+        public async Task<ActionResult> CreateAndEmailResume(MyResume myResume)
         {
             _response = new APIResponse();
             try
@@ -238,5 +238,22 @@ namespace API.Job.Application.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Server Error!");
             }
         }
+
+
+        [HttpGet]
+        [Route("getUserResumeDownloadData")]
+        public IActionResult GetUserResumeDownloadData()
+        {
+            try
+            {
+                var userDatas = _resumeCreator.GetUserResumeDownloadData();
+                return Ok(userDatas);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }          
+        }
+
     }
 }
