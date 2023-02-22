@@ -1,7 +1,7 @@
 # Job-Application-MGT
-edit@client m/c
+### edit@client m/c
 
-edit@12:52PM @client m/c
+### edit@12:52PM @client m/c
 
 ### edit@12:54 @client m/c
 ### checkout single file and commit/push to github
@@ -11,4 +11,4 @@ edit@12:52PM @client m/c
 - ### $ git commit -m 'edit-readme-wip4'
 - ### $ git push -u origin main
 
-edit@01:05PM @client m/c
+### edit@01:05PM @client m/c
