@@ -255,5 +255,20 @@ namespace API.Job.Application.Controllers
             }          
         }
 
+        [HttpGet]
+        [Route("getUserResumeEmailData")]
+        public IActionResult GetUserResumeEmailData()
+        {
+            try
+            {
+                var userDatas = _resumeCreator.GetUserResumeEmailData();
+                return Ok(userDatas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
