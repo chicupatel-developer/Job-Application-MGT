@@ -13,6 +13,9 @@ Technology
 
 # System Diagram
 
+![System-Dia1](https://user-images.githubusercontent.com/26190114/220978088-2d23a6c3-a523-46ec-af60-122b5befabec.png)
+
+
 ![system dia drawio](https://user-images.githubusercontent.com/26190114/151030726-c8f6032f-67b4-452c-8fe0-f45456e67dee.png)
 
 
