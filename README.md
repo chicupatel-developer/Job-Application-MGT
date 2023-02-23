@@ -1,5 +1,14 @@
 # Job-Application-MGT
 
+Technology
+----------
+- Web API Core - 3.1, EF Core [Code First - EF Transaction]
+
+- Repository pattern
+
+- Sql Server
+
+- Angular 13, Html, CSS, Javascript, Bootstrap 5
 
 
 # System Diagram
