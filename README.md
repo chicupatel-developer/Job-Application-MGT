@@ -13,8 +13,7 @@ Technology
 
 # System Diagram
 
-![System-Dia3](https://user-images.githubusercontent.com/26190114/220985468-157b5fab-a7c4-4ad0-a740-352f26e457d2.png)
-
+![System-Dia](https://user-images.githubusercontent.com/26190114/220986723-f4080e0f-19f7-41d9-afbf-3e9d299b43fe.png)
 
 
 # Database
