@@ -97,14 +97,5 @@ Technology
 
 ### User-Data
 ![user-data-resume-downloaded](https://user-images.githubusercontent.com/26190114/230173693-c1e9c365-0a67-491b-b177-d9123b2a306c.PNG)
-![user-data-resume-emailed](https://user-images.githubusercontent.com/26190114/230173702-6efc7e9c-6abf-4878-9bf2-c43e58b8cc65.PNG)
-
-
-
-
-
-
-
-
-
+![user-data-resume-emailed](https://user-images.githubusercontent.com/26190114/230176956-dd383722-32c3-44f5-86a8-9afa645dab9f.PNG)
 
